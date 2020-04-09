@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pop-ups da ONG</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="(popups$ | async) as popups">
+    <ng-container *ngIf="popups.length > 0; else noPopups">
+      <app-popup-item
+        *ngFor="let popup of popups"
+        [popup]="popup"
+        (update)="onUpdate($event)"
+        (delete)="onDelete($event)"
+        (ativo)="onAtivo($event)"
+      ></app-popup-item>
+    </ng-container>
+    <ng-template #noPopups>
+      <ion-item lines="none">
+        Nenhum Pop-up cadastrado até o momento...
+      </ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/admin/popups/create" routerDirection="forward">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

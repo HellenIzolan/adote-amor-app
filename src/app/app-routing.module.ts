@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './admin/pages/dados-ong/dados-ong.module#DadosOngPageModule',
+    loadChildren: './admin//admin.module#AdminModule',
     canLoad: [AuthGuard]
   }
 ];

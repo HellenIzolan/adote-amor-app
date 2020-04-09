@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private navCtrl: NavController,
+    private route: ActivatedRoute,
     private overlayService: OverlayService
   ) {}
 
@@ -70,10 +72,10 @@ export class LoginPage implements OnInit {
         user: this.authForm.value,
         provider
       });
-      this;
+      this.navCtrl.navigateForward(this.route.snapshot.queryParamMap.get('redirect') || '/admin/dados');
     } catch (e) {
       console.log('Erro de autenticação: ', e);
-      await this.overlayService.toast({
+      await this.overlayService.alert({
         message: e.message
       });
     } finally {

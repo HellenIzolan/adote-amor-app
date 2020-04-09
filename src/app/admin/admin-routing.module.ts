@@ -8,8 +8,23 @@ const routes: Routes = [
     //canActivateChild: [AuthGuard],
     children: [
       {
-        path: '',
-        loadChildren: './admin/admin.modules#AdminModule',
+        path: 'popups/create',
+        loadChildren: './pages/popups-save/popups-save.module#PopupsSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'popups/edit/:id',
+        loadChildren: './pages/popups-save/popups-save.module#PopupsSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'popups',
+        loadChildren: './pages/popups/popups.module#PopupsPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'dados',
+        loadChildren: './pages/dados/dados.module#DadosPageModule',
         canLoad: [AuthGuard]
       }
     ]

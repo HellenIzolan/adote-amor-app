@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DadosOngPage } from './dados-ong.page';
+import { PopupsPage } from './popups.page';
 
-describe('DadosOngPage', () => {
-  let component: DadosOngPage;
-  let fixture: ComponentFixture<DadosOngPage>;
+describe('PopupsPage', () => {
+  let component: PopupsPage;
+  let fixture: ComponentFixture<PopupsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DadosOngPage ],
+      declarations: [ PopupsPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DadosOngPage);
+    fixture = TestBed.createComponent(PopupsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

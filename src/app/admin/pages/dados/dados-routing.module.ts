@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DadosOngPage } from './dados-ong.page';
+import { DadosPage } from './dados.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DadosOngPage
+    component: DadosPage
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class DadosOngPageRoutingModule {}
+export class DadosPageRoutingModule {}

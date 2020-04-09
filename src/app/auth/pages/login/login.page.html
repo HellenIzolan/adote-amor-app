@@ -1,124 +1,55 @@
 <ion-content padding>
   <ion-item>
-    <ion-img
-      width="80"
-      height="80"
-      src="/assets/images/icone.png"
-    ></ion-img>
+    <ion-img style="width:300px; height:300px;margin:auto; display:block;" src="/assets/images/icone.png"></ion-img>
   </ion-item>
 
-  <form
-    [formGroup]="authForm"
-    (submit)="onSubmit(authProviders.Email)"
-  >
-
+  <form [formGroup]="authForm" (submit)="onSubmit(authProviders.Email)">
     <ng-container *ngIf="!configs.isSignIn">
       <ion-item>
-        <ion-icon
-          name="person"
-          color="primary"
-          slot="start"
-        ></ion-icon>
-        <ion-input
-          type="text"
-          placeholder="Nome"
-          formControlName="name"
-        ></ion-input>
-        <ion-note
-          slot="end"
-          color="danger"
-          *ngIf="name.dirty && name.hasError('required')"
-        >
+        <ion-icon name="person" color="primary" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
+        <ion-note slot="end" color="danger" *ngIf="name.dirty && name.hasError('required')">
           *Obrigatório
         </ion-note>
-        <ion-note
-          slot="end"
-          color="danger"
-          *ngIf="name.dirty && name.hasError('minlength')"
-        >
+        <ion-note slot="end" color="danger" *ngIf="name.dirty && name.hasError('minlength')">
           Mínimo 3 caracteres
         </ion-note>
       </ion-item>
     </ng-container>
 
     <ion-item>
-      <ion-icon
-        name="mail"
-        color="primary"
-        slot="start"
-      ></ion-icon>
-      <ion-input
-        type="email"
-        placeholder="E-mail"
-        formControlName="email"
-        inputmode="email"
-        autoFocus="true"
-      >
+      <ion-icon name="mail" color="primary" slot="start"></ion-icon>
+      <ion-input type="email" placeholder="E-mail" formControlName="email" inputmode="email" autoFocus="true">
       </ion-input>
-      <ion-note
-        slot="end"
-        color="danger"
-        *ngIf="email.dirty && email.hasError('required')"
-      >
+      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('required')">
         *Obrigatório
       </ion-note>
-      <ion-note
-        slot="end"
-        color="danger"
-        *ngIf="email.dirty && email.hasError('email')"
-      >
+      <ion-note slot="end" color="danger" *ngIf="email.dirty && email.hasError('email')">
         E-mail Inválido
       </ion-note>
     </ion-item>
 
     <ion-item>
-      <ion-icon
-        name="lock-closed"
-        color="primary"
-        slot="start"
-      ></ion-icon>
-      <ion-input
-        type="password"
-        placeholder="Password"
-        formControlName="password"
-      ></ion-input>
-      <ion-note
-        slot="end"
-        color="danger"
-        *ngIf="password.dirty && password.hasError('required')"
-      >
+      <ion-icon name="lock-closed" color="primary" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('required')">
         *Obrigatório
       </ion-note>
-      <ion-note
-        slot="end"
-        color="danger"
-        *ngIf="password.dirty && password.hasError('minlength')"
-      >
+      <ion-note slot="end" color="danger" *ngIf="password.dirty && password.hasError('minlength')">
         Mínimo 6 caracteres
       </ion-note>
     </ion-item>
 
-    <ion-button
-      expand="block"
-      type="submit"
-      [disabled]="authForm.invalid"
-    >
+    <ion-button expand="block" type="submit" [disabled]="authForm.invalid">
       {{ configs.action}}
     </ion-button>
   </form>
 
-  <ion-button
-    expand="block"
-    fill="clear"
-    (click)="changeAuthAction()"
-  >
+  <ion-button expand="block" fill="clear" (click)="changeAuthAction()">
     {{configs.actionChange}}
   </ion-button>
   <ion-button expand="block" (click)="onSubmit(authProviders.Facebook)">
-    <ion-icon
-      name="logo-facebook"
-      slot="start"
-    ></ion-icon>
+    <ion-icon name="logo-facebook" slot="start"></ion-icon>
     Entrar com Facebook
   </ion-button>
 </ion-content>

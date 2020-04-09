@@ -14,27 +14,27 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Dados',
-      url: '/admin/admin/dados-ong',
+      url: '/admin/admin/dados',
       icon: 'duplicate'
     },
     {
       title: 'Conteúdos',
-      url: '/admin/admin/conteudos-ong',
+      url: '/admin/admin/conteudos',
       icon: 'newspaper'
     },
     {
       title: 'Marketing',
-      url: '/admin/admin/marketing-ong',
+      url: '/admin/admin/marketing',
       icon: 'bulb'
     },
     {
       title: 'Pop-Up',
-      url: '/admin/admin/popup-ong',
+      url: '/admin/admin/popup',
       icon: 'albums'
     },
     {
       title: 'Usuários',
-      url: '/admin/admin/usuarios-ong',
+      url: '/admin/admin/usuarios',
       icon: 'people'
     },
     {
