@@ -13,13 +13,26 @@
       <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
       <ion-input type="text" placeholder="Título" autofocus="true" inputmode="text" formControlName="titulo">
       </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('minlength')">
+        Mínimo 3 caracteres
+      </ion-note>
     </ion-item>
     <ion-item>
       <ion-icon name="document" slot="start" color="primary"></ion-icon>
       <ion-input type="text" placeholder="Imagem" inputmode="text" formControlName="imagem"> </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('minlength')">
+        Mínimo 3 caracteres
+      </ion-note>
     </ion-item>
     <ion-item> <ion-toggle slot="start" color="primary" formControlName="ativo"></ion-toggle> Ativar Pop-up </ion-item>
-    <ion-button expand="full" type="submit" [disabled]="popupForm.invalid">
+    <ion-button expand="full" color="tertiary" type="submit" [disabled]="popupForm.invalid">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
       Salvar
     </ion-button>
   </form>

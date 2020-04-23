@@ -1,6 +1,7 @@
 export interface Dados {
   id: string;
   razao_social: string;
+  fantasia: string;
   cnpj: string;
   email_principal: string;
   email_newsletter: string;

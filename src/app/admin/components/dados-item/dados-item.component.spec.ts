@@ -9,7 +9,7 @@ describe('DadosItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DadosItemComponent],
+      declarations: [ DadosItemComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

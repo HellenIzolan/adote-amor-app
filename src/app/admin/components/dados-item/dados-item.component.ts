@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Dados } from '../../models/dados.model';
 
 @Component({
@@ -9,7 +8,5 @@ import { Dados } from '../../models/dados.model';
 })
 export class DadosItemComponent {
   @Input() dados: Dados;
-  @Output() save = new EventEmitter<Dados>();
   @Output() update = new EventEmitter<Dados>();
-  @Output() delete = new EventEmitter<Dados>();
 }

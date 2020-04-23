@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
@@ -50,10 +50,18 @@ export class PopupsSavePage implements OnInit {
 
   private createForm(): void {
     this.popupForm = this.fb.group({
-      titulo: [' ', [Validators.required, Validators.minLength(3)]],
-      imagem: [' ', [Validators.required, Validators.minLength(3)]],
+      titulo: ['', [Validators.required, Validators.minLength(3)]],
+      imagem: ['', [Validators.required, Validators.minLength(3)]],
       ativo: [false]
     });
+  }
+
+  get titulo(): FormControl {
+    return <FormControl>this.popupForm.get('titulo');
+  }
+
+  get imagem(): FormControl {
+    return <FormControl>this.popupForm.get('imagem');
   }
 
   async onSubmit(): Promise<void> {

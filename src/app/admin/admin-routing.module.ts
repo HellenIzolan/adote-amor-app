@@ -8,6 +8,66 @@ const routes: Routes = [
     //canActivateChild: [AuthGuard],
     children: [
       {
+        path: 'dados/create',
+        loadChildren: './pages/dados-save/dados-save.module#DadosSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'dados/edit/:id',
+        loadChildren: './pages/dados-save/dados-save.module#DadosSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'dados',
+        loadChildren: './pages/dados/dados.module#DadosPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'telefones/create',
+        loadChildren: './pages/telefones-save/telefones-save.module#TelefonesSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'telefones/edit/:id',
+        loadChildren: './pages/telefones-save/telefones-save.module#TelefonesSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'telefones',
+        loadChildren: './pages/telefones/telefones.module#TelefonesPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'conteudos/create',
+        loadChildren: './pages/conteudos-save/conteudos-save.module#ConteudosSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'conteudos/edit/:id',
+        loadChildren: './pages/conteudos-save/conteudos-save.module#ConteudosSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'conteudos',
+        loadChildren: './pages/conteudos/conteudos.module#ConteudosPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'marketing/create',
+        loadChildren: './pages/marketing-save/marketing-save.module#MarketingSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'marketing/edit/:id',
+        loadChildren: './pages/marketing-save/marketing-save.module#MarketingSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'marketing',
+        loadChildren: './pages/marketing/marketing.module#MarketingPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
         path: 'popups/create',
         loadChildren: './pages/popups-save/popups-save.module#PopupsSavePageModule',
         canLoad: [AuthGuard]
@@ -20,11 +80,6 @@ const routes: Routes = [
       {
         path: 'popups',
         loadChildren: './pages/popups/popups.module#PopupsPageModule',
-        canLoad: [AuthGuard]
-      },
-      {
-        path: 'dados',
-        loadChildren: './pages/dados/dados.module#DadosPageModule',
         canLoad: [AuthGuard]
       }
     ]
