@@ -10,8 +10,9 @@
 <ion-content padding>
   <form [formGroup]="popupForm" (submit)="onSubmit()">
     <ion-item>
+      <ion-label>Título: </ion-label>
       <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Título" autofocus="true" inputmode="text" formControlName="titulo">
+      <ion-input type="text" placeholder="Ex: Aviso" autofocus="true" inputmode="text" formControlName="titulo">
       </ion-input>
       <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('required')">
         *Obrigatório
@@ -21,8 +22,9 @@
       </ion-note>
     </ion-item>
     <ion-item>
+      <ion-label>Imagem: </ion-label>
       <ion-icon name="document" slot="start" color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Imagem" inputmode="text" formControlName="imagem"> </ion-input>
+      <ion-input type="text" placeholder="Ex: image.jpg" inputmode="text" formControlName="imagem"> </ion-input>
       <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('required')">
         *Obrigatório
       </ion-note>

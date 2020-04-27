@@ -1,9 +1,65 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>conteudos-save</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/conteudos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <form [formGroup]="conteudoForm" (submit)="onSubmit()">
+    <ion-item>
+      <ion-label>Título: </ion-label>
+      <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
+      <ion-input type="text" placeholder="Ex: Novidades" autofocus="true" inputmode="text" formControlName="titulo">
+      </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('minlength')">
+        Mínimo 3 caracteres
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descrição: </ion-label>
+      <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
+      <ion-input type="text" placeholder="Ex: Novidades na área de..." inputmode="text" formControlName="descricao">
+      </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="descricao.dirty && descricao.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="descricao.dirty && descricao.hasError('minlength')">
+        Mínimo 10 caracteres
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Imagem: </ion-label>
+      <ion-icon name="document" slot="start" color="primary"></ion-icon>
+      <ion-input type="text" placeholder="Ex: image.jpg" inputmode="text" formControlName="imagem"> </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('minlength')">
+        Mínimo 3 caracteres
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Data: </ion-label>
+      <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+      <ion-datetime
+        cancel-text="Cancelar"
+        done-text="Salvar"
+        displayFormat="DD/MM/YYYY"
+        formControlName="data"
+      ></ion-datetime>
+      <ion-note slot="end" color="danger" *ngIf="data.dirty && data.hasError('required')">
+        *Obrigatório
+      </ion-note>
+    </ion-item>
+    <ion-button expand="full" color="tertiary" type="submit" [disabled]="conteudoForm.invalid">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Salvar
+    </ion-button>
+  </form>
 </ion-content>

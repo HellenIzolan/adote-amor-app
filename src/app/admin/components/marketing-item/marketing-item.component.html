@@ -1,3 +1,22 @@
-<p>
-  marketing-item works!
-</p>
+<ion-item-sliding #sliding>
+  <ion-item (click)="update.emit(marketing)">
+    <ion-icon *ngIf="marketing.titulo === 'Facebook'" name="logo-facebook" slot="start" color="primary"></ion-icon>
+    <ion-icon *ngIf="marketing.titulo === 'Instagram'" name="logo-instagram" slot="start" color="primary"></ion-icon>
+    <ion-icon *ngIf="marketing.titulo === 'LinkedIn'" name="logo-linkedin" slot="start" color="primary"></ion-icon>
+    <ion-icon *ngIf="marketing.titulo === 'Youtube'" name="logo-youtube" slot="start" color="primary"></ion-icon>
+    {{ marketing.link }}
+  </ion-item>
+  <ion-item-options side="start">
+    <ion-item-option
+      style="width:50px; font-size:10px;"
+      color="danger"
+      (click)="delete.emit(marketing); sliding.close()"
+    >
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-item-option>
+
+    <ion-item-option style="width:50px; font-size:10px;" (click)="update.emit(marketing); sliding.close()">
+      <ion-icon slot="icon-only" name="create"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

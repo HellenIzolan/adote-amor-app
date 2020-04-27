@@ -10,8 +10,9 @@
 <ion-content padding>
   <form [formGroup]="telefoneForm" (submit)="onSubmit()">
     <ion-item>
+      <ion-label>Título: </ion-label>
       <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Título" autofocus="true" inputmode="text" formControlName="titulo">
+      <ion-input type="text" placeholder="Ex: Escritório" autofocus="true" inputmode="text" formControlName="titulo">
       </ion-input>
       <ion-note slot="end" color="danger" *ngIf="titulo.dirty && titulo.hasError('required')">
         *Obrigatório
@@ -21,10 +22,11 @@
       </ion-note>
     </ion-item>
     <ion-item>
+      <ion-label>Número: </ion-label>
       <ion-icon name="call-outline" slot="start" color="primary"></ion-icon>
       <ion-input
         type="tel"
-        placeholder="Número"
+        placeholder="Ex: (99) 99999-9999"
         inputmode="text"
         formControlName="numero"
         name="phone"
