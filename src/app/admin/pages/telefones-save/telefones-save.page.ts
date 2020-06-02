@@ -50,7 +50,7 @@ export class TelefonesSavePage implements OnInit {
   private createForm(): void {
     this.telefoneForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.minLength(3)]],
-      numero: ['', [Validators.required, Validators.minLength(10)]]
+      numero: ['', [Validators.required, Validators.minLength(11)]]
     });
   }
 

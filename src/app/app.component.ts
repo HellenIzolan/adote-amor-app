@@ -20,6 +20,11 @@ export class AppComponent implements OnInit {
       icon: 'duplicate'
     },
     {
+      title: 'Contas',
+      url: '/admin/contas',
+      icon: 'card'
+    },
+    {
       title: 'Telefones',
       url: '/admin/telefones',
       icon: 'call'
@@ -38,6 +43,11 @@ export class AppComponent implements OnInit {
       title: 'Pop-ups',
       url: '/admin/popups',
       icon: 'albums'
+    },
+    {
+      title: 'Acessar site',
+      url: '/home',
+      icon: 'arrow-redo'
     }
   ];
 

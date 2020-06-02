@@ -23,6 +23,21 @@ const routes: Routes = [
         canLoad: [AuthGuard]
       },
       {
+        path: 'contas/create',
+        loadChildren: './pages/contas-save/contas-save.module#ContasSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'contas/edit/:id',
+        loadChildren: './pages/contas-save/contas-save.module#ContasSavePageModule',
+        canLoad: [AuthGuard]
+      },
+      {
+        path: 'contas',
+        loadChildren: './pages/contas/contas.module#ContasPageModule',
+        canLoad: [AuthGuard]
+      },
+      {
         path: 'telefones/create',
         loadChildren: './pages/telefones-save/telefones-save.module#TelefonesSavePageModule',
         canLoad: [AuthGuard]

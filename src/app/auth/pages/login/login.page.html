@@ -15,7 +15,7 @@
           <ng-container *ngIf="!configs.isSignIn">
             <ion-item>
               <ion-icon name="person" color="primary" slot="start"></ion-icon>
-              <ion-input type="text" placeholder="Nome" formControlName="name"></ion-input>
+              <ion-input type="text" placeholder="Nome da ONG" formControlName="name"></ion-input>
               <ion-note slot="end" color="danger" *ngIf="name.dirty && name.hasError('required')">
                 *Obrigatório
               </ion-note>

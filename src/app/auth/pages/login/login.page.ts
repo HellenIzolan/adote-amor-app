@@ -74,10 +74,29 @@ export class LoginPage implements OnInit {
       });
       this.navCtrl.navigateForward(this.route.snapshot.queryParamMap.get('redirect') || '/admin/dados');
     } catch (e) {
-      console.log('Erro de autenticação: ', e);
+      if (e.code = "auth/wrong-password") {
+        console.log('Erro de autenticação: password ', e);
       await this.overlayService.alert({
-        message: e.message
+        header: 'Atenção!',
+        message: 'Senha incorreta',
+        buttons: ['Ok']
       });
+    }
+      else if (e.code = "auth / user - not - found"){
+        console.log('Erro de autenticação: user ', e);
+        await this.overlayService.alert({
+          header: 'Atenção!',
+          message: 'Usuário incorreto',
+          buttons: ['Ok']
+        });
+    }
+    else{
+        await this.overlayService.alert({
+          header: 'Atenção!',
+          message: e.message,
+          buttons: ['Ok']
+        });
+    }
     } finally {
       loading.dismiss();
     }

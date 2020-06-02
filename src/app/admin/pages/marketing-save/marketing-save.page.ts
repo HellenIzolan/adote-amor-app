@@ -49,7 +49,7 @@ export class MarketingSavePage implements OnInit {
 
   private createForm(): void {
     this.marketingForm = this.fb.group({
-      titulo: ['', []],
+      titulo: ['', [Validators.required]],
       link: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
