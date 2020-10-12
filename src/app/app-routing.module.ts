@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./principal/pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'politica-de-privacidade',
+    loadChildren: () => import('./principal/pages/politica-de-privacidade/politica-de-privacidade.module').then( m => m.PoliticaDePrivacidadePageModule)
   }
 ];
 

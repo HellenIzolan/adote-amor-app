@@ -12,7 +12,7 @@ import { AuthOptions, AuthProvider, User } from './auth.types';
 export class AuthService {
   authState$: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth) {
     this.authState$ = this.afAuth.authState;
     //this.logout();
   }

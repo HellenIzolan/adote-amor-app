@@ -1,0 +1,25 @@
+.back-cats {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(/assets/images/cats.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    height: 350px;
+    margin-top: 20px;
+}
+.footer {
+  background-color: #3880ff;
+}
+.home-menu {
+  background-color: #3880ff;
+}
+.home-menu p {
+  text-align: center;
+  color: white;
+}
+p{
+  line-height: 24px;
+}
+span{
+  color: #3880ff;
+  font-weight: 700;
+}
