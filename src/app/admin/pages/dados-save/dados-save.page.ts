@@ -54,7 +54,8 @@ export class DadosSavePage implements OnInit {
           bairro,
           cep,
           cidade,
-          estado
+          estado,
+          url_site
         }) => {
           this.dadosForm.get('razao_social').setValue(razao_social);
           this.dadosForm.get('fantasia').setValue(fantasia);
@@ -68,6 +69,7 @@ export class DadosSavePage implements OnInit {
           this.dadosForm.get('cep').setValue(cep);
           this.dadosForm.get('cidade').setValue(cidade);
           this.dadosForm.get('estado').setValue(estado);
+          this.dadosForm.get('url_site').setValue(url_site);
         }
       );
   }
@@ -85,7 +87,8 @@ export class DadosSavePage implements OnInit {
       bairro: ['', [Validators.required, Validators.minLength(3)]],
       cep: ['', [Validators.required, Validators.minLength(8)]],
       cidade: ['', [Validators.required, Validators.minLength(3)]],
-      estado: ['', [Validators.required, Validators.minLength(2)]]
+      estado: ['', [Validators.required, Validators.minLength(2)]],
+      url_site: ['', [Validators.required, Validators.minLength(2)]]
     });
   }
 
@@ -135,6 +138,10 @@ export class DadosSavePage implements OnInit {
 
   get estado(): FormControl {
     return <FormControl>this.dadosForm.get('estado');
+  }
+
+  get url_site(): FormControl{
+    return <FormControl>this.dadosForm.get('url_site');
   }
 
   async onSubmit(): Promise<void> {

@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { take } from 'rxjs/operators';
 
 import { ConteudosService } from '../../services/conteudos.service';
+import { PhotoService } from '../../services/photo.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class ConteudosSavePage implements OnInit {
     private navCtrl: NavController,
     private overlayService: OverlayService,
     private route: ActivatedRoute,
-    private conteudosService: ConteudosService
+    private conteudosService: ConteudosService,
+    public photoService: PhotoService
   ) {}
 
   ngOnInit(): void {
@@ -93,5 +95,9 @@ export class ConteudosSavePage implements OnInit {
     } finally {
       loading.dismiss();
     }
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 }

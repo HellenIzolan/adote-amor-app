@@ -57,6 +57,11 @@
         *Obrigatório
       </ion-note>
     </ion-item>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addPhotoToGallery()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <ion-button expand="full" color="tertiary" type="submit" [disabled]="conteudoForm.invalid">
       <ion-icon slot="start" name="save-outline"></ion-icon>
       Salvar

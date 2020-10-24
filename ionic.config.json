@@ -1,5 +1,7 @@
 {
   "name": "AdoteAmor",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

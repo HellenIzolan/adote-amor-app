@@ -12,4 +12,5 @@ export interface Dados {
   cep: string;
   cidade: string;
   estado: string;
+  url_site: string;
 }
