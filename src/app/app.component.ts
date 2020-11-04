@@ -40,9 +40,9 @@ export class AppComponent implements OnInit {
       icon: 'bulb'
     },
     {
-      title: 'Pop-ups',
-      url: '/admin/popups',
-      icon: 'albums'
+      title: 'Animais para Adoção',
+      url: '/admin/adocoes',
+      icon: 'heart'
     },
     {
       title: 'Acessar site',

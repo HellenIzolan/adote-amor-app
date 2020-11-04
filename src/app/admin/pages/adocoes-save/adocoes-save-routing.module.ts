@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PopupsPage } from './popups.page';
+import { AdocoesSavePage } from './adocoes-save.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PopupsPage
+    component: AdocoesSavePage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PopupsPageRoutingModule {}
+export class AdocoesSavePageRoutingModule {}

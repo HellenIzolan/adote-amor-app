@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'politica-de-privacidade',
     loadChildren: () => import('./principal/pages/politica-de-privacidade/politica-de-privacidade.module').then( m => m.PoliticaDePrivacidadePageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./site/pages/inicio/inicio.module').then( m => m.InicioPageModule)
   }
 ];
 

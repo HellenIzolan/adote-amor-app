@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage'; 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, map, finalize } from 'rxjs/operators';
+
 
 import { ConteudosService } from '../../services/conteudos.service';
-import { PhotoService } from '../../services/photo.service';
+//import { PhotoService } from '../../services/photo.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
 
 @Component({
@@ -18,18 +21,26 @@ export class ConteudosSavePage implements OnInit {
   pageTitle = '...';
   conteudoId: string = undefined;
 
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+  uploadState: Observable<string>;
+
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
     private overlayService: OverlayService,
     private route: ActivatedRoute,
     private conteudosService: ConteudosService,
-    public photoService: PhotoService
+    private afStorage: AngularFireStorage
+    //public photoService: PhotoService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.init();
+    //this.photoService.loadSaved();
   }
 
   init(): void {
@@ -43,11 +54,11 @@ export class ConteudosSavePage implements OnInit {
     this.conteudosService
       .get(conteudoId)
       .pipe(take(1))
-      .subscribe(({ titulo, descricao, imagem, data }) => {
+      .subscribe(({ titulo, descricao, data, imagem }) => {
         this.conteudoForm.get('titulo').setValue(titulo);
         this.conteudoForm.get('descricao').setValue(descricao);
-        this.conteudoForm.get('imagem').setValue(imagem);
         this.conteudoForm.get('data').setValue(data);
+        this.conteudoForm.get('imagem').setValue(imagem);
       });
   }
 
@@ -55,8 +66,8 @@ export class ConteudosSavePage implements OnInit {
     this.conteudoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.minLength(3)]],
       descricao: ['', [Validators.required, Validators.minLength(10)]],
-      imagem: ['', [Validators.required, Validators.minLength(3)]],
-      data: ['', [Validators.required]]
+      data: ['', [Validators.required]],
+      imagem: ['', [Validators.required]]
     });
   }
 
@@ -68,12 +79,12 @@ export class ConteudosSavePage implements OnInit {
     return <FormControl>this.conteudoForm.get('descricao');
   }
 
-  get imagem(): FormControl {
-    return <FormControl>this.conteudoForm.get('imagem');
-  }
-
   get data(): FormControl {
     return <FormControl>this.conteudoForm.get('data');
+  }
+
+  get imagem(): FormControl {
+    return <FormControl>this.conteudoForm.get('imagem');
   }
 
   async onSubmit(): Promise<void> {
@@ -97,7 +108,28 @@ export class ConteudosSavePage implements OnInit {
     }
   }
 
-  addPhotoToGallery() {
+    // function to upload file
+    upload = (event) => {
+      // create a random id
+      const randomId = Math.random().toString(36).substring(2);
+      // create a reference to the storage bucket location
+      this.ref = this.afStorage.ref('/conteudos/' + randomId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      this.task = this.ref.put(event.target.files[0]);
+      // get notified when the download URL is available
+      this.task.snapshotChanges().pipe(
+        finalize(() => this.downloadURL = this.ref.getDownloadURL())
+      )
+      .subscribe();
+      this.ref.getDownloadURL().toPromise().then(res => {
+        console.log('URL: ', res);
+        this.conteudoForm.get('imagem').setValue(res);
+      });
+      this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+    }
+
+  /*addPhotoToGallery() {
     this.photoService.addNewToGallery();
-  }
+  }*/
 }

@@ -5,7 +5,7 @@ import { ContaItemComponent } from './conta-item/conta-item.component';
 import { ConteudoItemComponent } from './conteudo-item/conteudo-item.component';
 import { DadosItemComponent } from './dados-item/dados-item.component';
 import { MarketingItemComponent } from './marketing-item/marketing-item.component';
-import { PopupItemComponent } from './popup-item/popup-item.component';
+import { AdocaoItemComponent } from './adocao-item/adocao-item.component';
 import { TelefoneItemComponent } from './telefone-item/telefone-item.component';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { TelefoneItemComponent } from './telefone-item/telefone-item.component';
     ConteudoItemComponent,
     DadosItemComponent,
     MarketingItemComponent,
-    PopupItemComponent,
+    AdocaoItemComponent,
     TelefoneItemComponent
   ],
   imports: [SharedModule],
@@ -23,7 +23,7 @@ import { TelefoneItemComponent } from './telefone-item/telefone-item.component';
     ConteudoItemComponent,
     DadosItemComponent,
     MarketingItemComponent,
-    PopupItemComponent,
+    AdocaoItemComponent,
     TelefoneItemComponent
   ]
 })

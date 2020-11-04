@@ -6,7 +6,13 @@
     >
       <ion-content *ngIf="user">
         <ion-list id="inbox-list">
-          <ion-list-header>
+          <ion-item>
+            <ion-img
+              style="width:200px; height:200px;margin:auto; display:block;"
+              src="/assets/images/icone.png"
+            ></ion-img>
+          </ion-item>
+          <ion-list-header class="pt-20">
             <ion-label>{{ user.displayName }}</ion-label>
           </ion-list-header>
           <ion-note style="padding-bottom: 0px;">{{ user.email }}</ion-note>

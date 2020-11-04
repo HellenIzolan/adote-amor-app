@@ -46,15 +46,7 @@
     </ion-item>
     <ion-item>
       <ion-label color="primary" style="font-size:14px; font-weight: bold;">CNPJ: </ion-label>
-      <ion-input
-        type="text"
-        placeholder="CNPJ"
-        autofocus="true"
-        inputmode="text"
-        formControlName="cnpj"
-        name="cnpj"
-        [brmasker]="{person: true}"
-      >
+      <ion-input type="text" placeholder="Ex: 00.000.000/0000-00" autofocus="true" inputmode="text" formControlName="cnpj" name="cnpj" [brmasker]="{person: true}">
       </ion-input>
       <ion-note slot="end" color="danger" *ngIf="cnpj.dirty && cnpj.hasError('required')">
         *Obrigatório
@@ -143,6 +135,9 @@
       <ion-note slot="end" color="danger" *ngIf="cep.dirty && cep.hasError('minlength')">
         Mínimo 8 caracteres
       </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="cep.dirty && cep.hasError('maxlength')">
+        Máximo 8 caracteres
+      </ion-note>
     </ion-item>
     <ion-item>
       <ion-label color="primary" style="font-size:14px; font-weight: bold;">Cidade: </ion-label>
@@ -179,6 +174,44 @@
       <ion-note slot="end" color="danger" *ngIf="url_site.dirty && url_site.hasError('minlength')">
         Mínimo 3 caracteres
       </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon style="padding-left:20px;" name="document-text-outline" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary" style="font-size:18px; font-weight: bold;">Texto sobre a ONG</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" style="font-size:14px; font-weight: bold;">Sobre: </ion-label>
+      <ion-input type="text" placeholder="A ONG foi fundada em ... na cidade de ..." autofocus="true" inputmode="text" formControlName="sobre"> </ion-input>
+      <ion-note slot="end" color="danger" *ngIf="sobre.dirty && sobre.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-note slot="end" color="danger" *ngIf="sobre.dirty && sobre.hasError('minlength')">
+        Mínimo 50 caracteres
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon style="padding-left:20px;" name="image-outline" slot="start" color="primary"></ion-icon>
+      <ion-label color="primary" style="font-size:18px; font-weight: bold;">Logo da ONG</ion-label>
+      <ion-input autofocus="true" inputmode="text" formControlName="logo" hidden> </ion-input>
+    </ion-item>
+    <ion-item *ngIf="logo">
+      <ion-img padding style="width:200px;" [src]="logo.value"></ion-img>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" style="font-size:14px; font-weight: bold;">Logo: </ion-label>
+      <ion-input text-left type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg"  autofocus="true"></ion-input>
+    </ion-item>
+    <ion-item class="ion-justify-content-center">
+      <a *ngIf="downloadURL | async; let uploadSrc" [href]="uploadSrc" target="_blank">Baixar o arquivo enviado</a>
+      <ion-img *ngIf="downloadURL | async; let url" [src]="url" alt="Image from AngularFireStorage"></ion-img>
+    
+      <!--<progress max="100" [value]="(uploadProgress | async)"></progress>-->
+      <!--<section class="control-bar" *ngIf="uploadState | async; let state">
+        <button (click)="task.pause()" [disabled]="state === 'paused'">Pause</button>
+        <button (click)="task.cancel()" [disabled]="!(state === 'paused' || state === 'running')">Cancel</button>
+        <button (click)="task.resume()" [disabled]="state === 'running'">Resume</button>
+      </section>-->
+      
     </ion-item>
     <ion-button expand="full" color="tertiary" type="submit" [disabled]="dadosForm.invalid">
       <ion-icon slot="start" name="save-outline"></ion-icon>

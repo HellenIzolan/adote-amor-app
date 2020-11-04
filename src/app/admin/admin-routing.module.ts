@@ -83,18 +83,18 @@ const routes: Routes = [
         canLoad: [AuthGuard]
       },
       {
-        path: 'popups/create',
-        loadChildren: './pages/popups-save/popups-save.module#PopupsSavePageModule',
+        path: 'adocoes/create',
+        loadChildren: './pages/adocoes-save/adocoes-save.module#AdocoesSavePageModule',
         canLoad: [AuthGuard]
       },
       {
-        path: 'popups/edit/:id',
-        loadChildren: './pages/popups-save/popups-save.module#PopupsSavePageModule',
+        path: 'adocoes/edit/:id',
+        loadChildren: './pages/adocoes-save/adocoes-save.module#AdocoesSavePageModule',
         canLoad: [AuthGuard]
       },
       {
-        path: 'popups',
-        loadChildren: './pages/popups/popups.module#PopupsPageModule',
+        path: 'adocoes',
+        loadChildren: './pages/adocoes/adocoes.module#AdocoesPageModule',
         canLoad: [AuthGuard]
       }
     ]

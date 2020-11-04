@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PopupsPage } from './popups.page';
+import { AdocoesSavePage } from './adocoes-save.page';
 
-describe('PopupsPage', () => {
-  let component: PopupsPage;
-  let fixture: ComponentFixture<PopupsPage>;
+describe('AdocoesSavePage', () => {
+  let component: AdocoesSavePage;
+  let fixture: ComponentFixture<AdocoesSavePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PopupsPage ],
+      declarations: [ AdocoesSavePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PopupsPage);
+    fixture = TestBed.createComponent(AdocoesSavePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

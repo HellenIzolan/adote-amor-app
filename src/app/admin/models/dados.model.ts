@@ -13,4 +13,6 @@ export interface Dados {
   cidade: string;
   estado: string;
   url_site: string;
+  sobre: string;
+  logo: string;
 }

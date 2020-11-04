@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Firestore } from 'src/app/core/classes/firestore.class';
-import { Popup } from '../models/popup.model';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Firestore } from '../../core/classes/firestore.class';
+import { Telefone } from '../../admin/models/telefone.model';
+import { AuthService } from '../../core/services/auth.service';
 import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PopupsService extends Firestore<Popup> {
+export class SiteService extends Firestore<Telefone> {
   constructor(private authService: AuthService, db: AngularFirestore) {
     super(db);
     this.init();
@@ -18,7 +18,7 @@ export class PopupsService extends Firestore<Popup> {
     this.authService.authState$.subscribe(user => {
       if (user) {
         // /collection/document/collection/document
-        this.setCollection(`/ongs/${user.uid}/popups`, ref => ref.orderBy('ativo', 'desc').orderBy('titulo', 'asc'));
+        this.setCollection(`/ongs/${user.uid}/telefones`);
         return;
       }
       this.setCollection(null);

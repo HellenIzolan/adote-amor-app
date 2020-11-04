@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage'; 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, map, finalize } from 'rxjs/operators';
 
 import { DadosService } from '../../services/dados.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
@@ -17,20 +19,27 @@ export class DadosSavePage implements OnInit {
   pageTitle = '...';
   dadosId: string = undefined;
 
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+  uploadState: Observable<string>;
+
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
     private overlayService: OverlayService,
     private route: ActivatedRoute,
-    private dadosService: DadosService
+    private dadosService: DadosService,
+    private afStorage: AngularFireStorage
   ) { }
 
   ngOnInit(): void {
     this.createForm();
     this.init();
   }
-
-  init(): void {
+  
+  init(): void {   
     const dadosId = this.route.snapshot.paramMap.get('id');
     if (!dadosId) {
       this.pageTitle = 'Inserir Dados';
@@ -55,7 +64,9 @@ export class DadosSavePage implements OnInit {
           cep,
           cidade,
           estado,
-          url_site
+          url_site,
+          sobre,
+          logo
         }) => {
           this.dadosForm.get('razao_social').setValue(razao_social);
           this.dadosForm.get('fantasia').setValue(fantasia);
@@ -70,6 +81,8 @@ export class DadosSavePage implements OnInit {
           this.dadosForm.get('cidade').setValue(cidade);
           this.dadosForm.get('estado').setValue(estado);
           this.dadosForm.get('url_site').setValue(url_site);
+          this.dadosForm.get('sobre').setValue(sobre);
+          this.dadosForm.get('logo').setValue(logo);
         }
       );
   }
@@ -85,10 +98,12 @@ export class DadosSavePage implements OnInit {
       numero: ['', [Validators.required]],
       complemento: [''],
       bairro: ['', [Validators.required, Validators.minLength(3)]],
-      cep: ['', [Validators.required, Validators.minLength(8)]],
+      cep: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       cidade: ['', [Validators.required, Validators.minLength(3)]],
-      estado: ['', [Validators.required, Validators.minLength(2)]],
-      url_site: ['', [Validators.required, Validators.minLength(2)]]
+      estado: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+      url_site: ['', [Validators.required, Validators.minLength(2)]],
+      sobre: ['', [Validators.required, Validators.minLength(50)]],
+      logo: ['']
     });
   }
 
@@ -144,6 +159,14 @@ export class DadosSavePage implements OnInit {
     return <FormControl>this.dadosForm.get('url_site');
   }
 
+  get sobre(): FormControl{
+    return <FormControl>this.dadosForm.get('sobre');
+  }
+
+  get logo(): FormControl{
+    return <FormControl>this.dadosForm.get('logo');
+  }
+
   async onSubmit(): Promise<void> {
     const loading = await this.overlayService.loading({
       message: 'Salvando...'
@@ -164,4 +187,35 @@ export class DadosSavePage implements OnInit {
       loading.dismiss();
     }
   }
+
+    // function to upload file
+    upload = (event) => {
+      // create a random id
+      const randomId = Math.random().toString(36).substring(2);
+      // create a reference to the storage bucket location
+      this.ref = this.afStorage.ref('/dados/' + randomId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      this.task = this.ref.put(event.target.files[0]);
+      
+      // AngularFireUploadTask provides observable
+      // to get uploadProgress value
+      /*this.uploadProgress = this.task.snapshotChanges()
+       .pipe(map(s => (s.bytesTransferred / s.totalBytes) * 100));
+      
+      // observe upload progress
+      this.uploadProgress = this.task.percentageChanges();
+      // get notified when the download URL is available
+      */
+      this.task.snapshotChanges().pipe(
+        finalize(() => this.downloadURL = this.ref.getDownloadURL())
+      )
+      .subscribe();
+      this.ref.getDownloadURL().toPromise().then(res => {
+        console.log('URL: ', res);
+        this.dadosForm.get('logo').setValue(res);
+      });
+      this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+
+    }
 }

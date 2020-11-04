@@ -34,17 +34,6 @@
       </ion-note>
     </ion-item>
     <ion-item>
-      <ion-label>Imagem: </ion-label>
-      <ion-icon name="document" slot="start" color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Ex: image.jpg" inputmode="text" formControlName="imagem"> </ion-input>
-      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('required')">
-        *Obrigatório
-      </ion-note>
-      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('minlength')">
-        Mínimo 3 caracteres
-      </ion-note>
-    </ion-item>
-    <ion-item>
       <ion-label>Data: </ion-label>
       <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
       <ion-datetime
@@ -57,11 +46,35 @@
         *Obrigatório
       </ion-note>
     </ion-item>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-item>
+      <ion-label>Imagem: </ion-label>
+      <ion-icon name="document" slot="start" color="primary"></ion-icon>
+      <ion-input text-left type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg"  autofocus="true"></ion-input>
+      <ion-note slot="end" color="danger" *ngIf="imagem.dirty && imagem.hasError('required')">
+        *Obrigatório
+      </ion-note>
+      <ion-input autofocus="true" inputmode="text" formControlName="imagem" hidden> </ion-input>
+    </ion-item>
+    <ion-item *ngIf="imagem">
+      <ion-img padding style="width:200px;" [src]="imagem.value"></ion-img>      
+    </ion-item>
+    <ion-item class="ion-justify-content-center">
+      <a *ngIf="downloadURL | async; let uploadSrc" [href]="uploadSrc" target="_blank">Baixar o arquivo enviado</a>
+      <ion-img *ngIf="downloadURL | async; let url" [src]="url" alt="Image from AngularFireStorage"></ion-img>      
+    </ion-item>
+    <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button (click)="addPhotoToGallery()">
         <ion-icon name="camera"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+    <ion-grid>
+      <ion-row>
+      <ion-col size="6" 
+        *ngFor="let photo of photoService.photos; index as position">
+          <ion-img [src]="photo.webviewPath"></ion-img>
+      </ion-col>
+      </ion-row>
+    </ion-grid>-->
     <ion-button expand="full" color="tertiary" type="submit" [disabled]="conteudoForm.invalid">
       <ion-icon slot="start" name="save-outline"></ion-icon>
       Salvar
