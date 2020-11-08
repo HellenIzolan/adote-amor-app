@@ -207,14 +207,14 @@ export class DadosSavePage implements OnInit {
       this.uploadProgress = this.task.percentageChanges();
       // get notified when the download URL is available
       */
-      this.task.snapshotChanges().pipe(
-        finalize(() => this.downloadURL = this.ref.getDownloadURL())
+     this.task.snapshotChanges().pipe(
+      finalize(() => {
+          this.downloadURL = this.ref.getDownloadURL();
+          this.downloadURL.subscribe( url => { 
+            this.dadosForm.get('logo').setValue(url)})
+          })
       )
       .subscribe();
-      this.ref.getDownloadURL().toPromise().then(res => {
-        console.log('URL: ', res);
-        this.dadosForm.get('logo').setValue(res);
-      });
       this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
 
     }

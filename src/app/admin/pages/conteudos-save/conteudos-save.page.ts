@@ -6,10 +6,9 @@ import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take, map, finalize } from 'rxjs/operators';
 
-
 import { ConteudosService } from '../../services/conteudos.service';
-//import { PhotoService } from '../../services/photo.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
+//import { PhotoService } from '../../services/photo.service';
 
 @Component({
   selector: 'app-conteudos-save',
@@ -23,7 +22,6 @@ export class ConteudosSavePage implements OnInit {
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
-  uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
   uploadState: Observable<string>;
 
@@ -108,26 +106,26 @@ export class ConteudosSavePage implements OnInit {
     }
   }
 
-    // function to upload file
-    upload = (event) => {
-      // create a random id
-      const randomId = Math.random().toString(36).substring(2);
-      // create a reference to the storage bucket location
-      this.ref = this.afStorage.ref('/conteudos/' + randomId);
-      // the put method creates an AngularFireUploadTask
-      // and kicks off the upload
-      this.task = this.ref.put(event.target.files[0]);
-      // get notified when the download URL is available
-      this.task.snapshotChanges().pipe(
-        finalize(() => this.downloadURL = this.ref.getDownloadURL())
-      )
-      .subscribe();
-      this.ref.getDownloadURL().toPromise().then(res => {
-        console.log('URL: ', res);
-        this.conteudoForm.get('imagem').setValue(res);
-      });
-      this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
-    }
+  // function to upload file
+  upload = (event) => {
+    // create a random id
+    const randomId = Math.random().toString(36).substring(2);
+    // create a reference to the storage bucket location
+    this.ref = this.afStorage.ref('/conteudos/' + randomId);
+    // the put method creates an AngularFireUploadTask
+    // and kicks off the upload
+    this.task = this.ref.put(event.target.files[0]);
+    // get notified when the download URL is available
+    this.task.snapshotChanges().pipe(
+      finalize(() => {
+          this.downloadURL = this.ref.getDownloadURL();
+          this.downloadURL.subscribe( url => { 
+            this.conteudoForm.get('imagem').setValue(url)})
+          })
+    )
+    .subscribe();
+    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+  }
 
   /*addPhotoToGallery() {
     this.photoService.addNewToGallery();

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage'; 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, map, finalize } from 'rxjs/operators';
 
 import { AdocoesService } from '../../services/adocoes.service';
 import { OverlayService } from 'src/app/core/services/overlay.service';
@@ -17,12 +19,18 @@ export class AdocoesSavePage implements OnInit {
   pageTitle = '...';
   adocaoId: string = undefined;
 
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  downloadURL: Observable<string>;
+  uploadState: Observable<string>;
+
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
     private overlayService: OverlayService,
     private route: ActivatedRoute,
-    private adocoesService: AdocoesService
+    private adocoesService: AdocoesService,
+    private afStorage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -89,5 +97,26 @@ export class AdocoesSavePage implements OnInit {
     } finally {
       loading.dismiss();
     }
+  }
+  
+  // function to upload file
+  upload = (event) => {
+    // create a random id
+    const randomId = Math.random().toString(36).substring(2);
+    // create a reference to the storage bucket location
+    this.ref = this.afStorage.ref('/adocoes/' + randomId);
+    // the put method creates an AngularFireUploadTask
+    // and kicks off the upload
+    this.task = this.ref.put(event.target.files[0]);
+    // get notified when the download URL is available
+    this.task.snapshotChanges().pipe(
+      finalize(() => {
+          this.downloadURL = this.ref.getDownloadURL();
+          this.downloadURL.subscribe( url => { 
+            this.adocaoForm.get('imagem').setValue(url)})
+          })
+    )
+    .subscribe();
+    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
   }
 }

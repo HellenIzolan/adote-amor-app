@@ -1,5 +1,8 @@
 <ion-item-sliding #sliding>
   <ion-item (click)="update.emit(conteudo)">
+    <ion-item padding *ngIf="conteudo.imagem">
+      <ion-img style="width:50px;" [src]="conteudo.imagem"></ion-img>      
+    </ion-item>
     <ion-label
       ><strong style="color:#428cff;">{{ conteudo.titulo }} </strong>
       <ion-datetime displayFormat="DD/MM/YYYY" value="{{ conteudo.data }}"></ion-datetime

@@ -1,5 +1,8 @@
 <ion-item-sliding #sliding>
   <ion-item (click)="update.emit(adocao)">
+    <ion-item padding *ngIf="adocao.imagem">
+      <ion-img padding style="width:50px;" [src]="adocao.imagem"></ion-img>      
+    </ion-item>
     {{ adocao.nome }}
     <ion-toggle
       slot="end"

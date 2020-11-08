@@ -55,8 +55,8 @@
       </ion-note>
       <ion-input autofocus="true" inputmode="text" formControlName="imagem" hidden> </ion-input>
     </ion-item>
-    <ion-item *ngIf="imagem">
-      <ion-img padding style="width:200px;" [src]="imagem.value"></ion-img>      
+    <ion-item padding *ngIf="imagem.value != ''">
+      <ion-img style="width:200px;" [src]="imagem.value"></ion-img>      
     </ion-item>
     <ion-item class="ion-justify-content-center">
       <a *ngIf="downloadURL | async; let uploadSrc" [href]="uploadSrc" target="_blank">Baixar o arquivo enviado</a>
