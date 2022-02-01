@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
-import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   //ReactiveFormsModule possibilita a validacao e configuracao do form
   imports: [IonicModule],
-  declarations: [LogoutButtonComponent],
-  exports: [CommonModule, ReactiveFormsModule, IonicModule, LogoutButtonComponent]
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule]
 })
 export class SharedModule {}

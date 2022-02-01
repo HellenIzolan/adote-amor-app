@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Fale Conosco</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row class="ion-text-center ion-justify-content-center ion-align-items-center">
+    <ion-col size="8">
+      <br>
+      <h2>Dúvidas, sugestões, gostaria de nos ajudar?</h2>
+      <h4>Entre em contato conosco através de nossos diversos canais e fique por dentro de nossas novidades.</h4><br>
+    </ion-col>
+    <ion-col size="12">
+      <div>
+      <h3>Como nos Contatar</h3><br>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="(dados$ | async) as dados">
+      <div *ngFor="let data of dados">
+        <div class="inline">
+          <ion-icon
+            name="mail-outline"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>
+            <a href="mailto:data.email_principal">{{data.email_principal}}</a>
+          </ion-label>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="(telefones$ | async) as telefones">
+      <div *ngFor="let telefone of telefones">
+        <div class="inline">
+          <ion-icon
+            name="call-outline"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>
+            <p>{{telefone.titulo}}: {{telefone.numero}}</p>
+          </ion-label>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="(marketing$ | async) as marketing">
+      <h3>Nossas Redes Sociais</h3><br>
+      <div class="inline padding">
+        <div *ngFor="let redes of marketing">
+          <a *ngIf="redes.titulo === 'Facebook'" href="{{redes.link}}" target="_blank">
+            <ion-icon name="logo-facebook" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p>Facebook</p>
+            </ion-label>
+          </a>
+          <a *ngIf="redes.titulo === 'Instagram'" href="{{redes.link}}" target="_blank">
+            <ion-icon name="logo-instagram" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p>Instagram</p>
+            </ion-label>
+          </a>
+          <a *ngIf="redes.titulo === 'LinkedIn'" href="{{redes.link}}" target="_blank">
+            <ion-icon name="logo-linkedin" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p>Linkedin</p>
+            </ion-label>
+          </a>
+          <a *ngIf="redes.titulo === 'Youtube'" href="{{redes.link}}" target="_blank">
+            <ion-icon name="logo-youtube" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <p>Youtube</p>
+            </ion-label>
+          </a>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="(dados$ | async) as dados">
+      <div *ngFor="let data of dados">
+      <h3>Onde nos Encontrar</h3><br>
+      <p><span *ngIf="(data.rua)">{{data.rua}}</span><span *ngIf="(data.numero)">, {{data.numero}}</span><span *ngIf="(data.bairro)">, {{data.bairro}}</span></p>
+      <p>{{data.cidade}}/{{data.estado}}</p>
+      <p>{{data.cep}}</p>
+      </div>
+    </ion-col>
+    <ion-col size="12" *ngIf="(contas$ | async) as contas">
+      <h3>Contas para Depósito</h3><br>
+      <div *ngFor="let conta of contas">
+        <p class="strong banco">Banco: {{ conta.titulo }}</p>
+        <p><span class="strong">Agência: </span>{{ conta.numero }}</p>
+        <p><span class="strong">Operacao: </span>{{ conta.operacao }}</p>
+        <p><span class="strong">Número: </span>{{ conta.numero }}</p>
+        <br>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

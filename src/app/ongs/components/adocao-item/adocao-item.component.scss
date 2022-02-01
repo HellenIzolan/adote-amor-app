@@ -1,0 +1,20 @@
+.adocao ion-img{
+    max-width: 200px;
+    float: right;
+}
+
+@media only screen and (max-width: 540px) {
+    .adocao{
+        text-align: center;
+    }
+    .adocao ion-img{
+        float: none;
+        margin: auto;
+    }
+}
+
+ion-icon{
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}

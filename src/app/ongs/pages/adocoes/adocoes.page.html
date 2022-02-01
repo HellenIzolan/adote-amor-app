@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Animais da ONG para Adoção</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>Animais da ONG para Adoção</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list *ngIf="(adocoes$ | async) as adocoes">
+    <ng-container *ngIf="adocoes.length > 0; else noAdocoes">
+      <app-adocao-item
+        *ngFor="let adocao of adocoes"
+        [adocao]="adocao"
+      ></app-adocao-item>
+    </ng-container>
+    <ng-template #noAdocoes>
+      <ion-item lines="none">
+        Nenhum Animal para adoção até o momento...
+      </ion-item>
+    </ng-template>
+  </ion-list>
+</ion-content>
+
+<!--<ion-content *ngIf="(adocoes$ | async) as adocoes">
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let adocao of adocoes">
+      <ion-col padding *ngIf="adocao.imagem" size-xl="3" size-lg="3" size-md="3" size-sm="10" size-xs="10" offset-xl="1" offset-lg="1" offset-md="1" offset-sm="1" offset-sx="1">
+        <ion-img [src]="adocao.imagem" ></ion-img>
+      </ion-col>
+      <ion-col padding size-xl="5" size-lg="5" size-md="5" size-sm="10" size-xs="10" offset-xl="1" offset-lg="1" offset-md="1" offset-sm="1" offset-sx="1">
+        <ion-icon name="paw-outline" color="secondary"></ion-icon>
+        <h1>{{ adocao.nome }}</h1>
+        <p>{{ adocao.sobre }}</p>   
+      </ion-col>
+    </ion-slide>
+  </ion-slides>
+</ion-content>-->

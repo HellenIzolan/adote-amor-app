@@ -1,0 +1,177 @@
+@font-face {
+    font-family: “PoiretOne-Regular”;
+    src: url("../../assets/fonts/PoiretOne-Regular.ttf");
+    //font-weight: normal;
+    //font-style: normal;
+}
+
+@font-face {
+    font-family: “Satisfy-Regular”;
+    src: url("../../assets/fonts/Satisfy-Regular.ttf");
+    //font-weight: normal;
+    //font-style: normal;
+}
+
+@font-face {
+    font-family: “IndieFlower-Regular”;
+    src: url("../../assets/fonts/IndieFlower-Regular.ttf");
+    //font-weight: normal;
+    //font-style: normal;
+}
+
+.center{
+    width: 80%;
+    margin: auto;
+}
+
+ion-slide{
+    min-height: 550px;
+}
+
+ion-footer{
+    text-align: center;
+}
+
+ion-footer ion-item {
+    text-align: left;
+}
+
+.slide-img{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    max-width: 200px;
+    margin:auto;
+    display:block
+}
+
+h3{
+    font-size:17px;
+    font-weight: 600;
+}
+
+h4{
+    font-size:15px;
+    font-weight: 400;
+}
+
+.logo-ong{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width:270px;
+    margin:auto;
+    display:block
+}
+
+.logo-footer{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    width:250px;
+    margin:auto;
+    display:block
+}
+
+.line-title{
+    background-image: linear-gradient(to right, #3880ff , #e857ea);
+    height: 7px;
+    width: 60px;
+    border-radius: 15%;
+}
+
+.destaque span{
+    color: linear-gradient(to right, #3880ff , #e857ea);
+    font-style: italic;
+    font-family: 'Satisfy-Regular';
+    font-weight: 600;
+}
+
+.destaque h2{
+    font-family: 'IndieFlower-Regular';
+}
+
+.inline{
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+
+.inline ion-icon{
+    padding-right: 20px;
+    margin-right: 10px;
+}
+
+.inline-social{
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.padding ion-icon{
+    margin: 10px;
+}
+
+.strong{
+    font-weight: 600;
+}
+
+.banco{
+    font-size: 18px;
+}
+
+.itens-footer{
+    min-height: 400px;
+}
+
+@media only screen and (max-width: 991px) {
+    .itens-footer{
+        min-height: auto;
+    }
+}
+
+.row-footer{
+    border-top: 1px solid lightgrey;
+}
+
+.marketing ion-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.insta{
+    color: #e857ea;
+}
+
+.header {
+    //--background-image: linear-gradient(to right, #3880ff , #e857ea) !important;
+    --background: linear-gradient(to right, #3880ff , #e857ea) !important;
+}
+
+@media only screen and (max-width: 403px) {
+    .header ion-label{
+        font-size: 12px;
+        padding-top: 5px;
+    }
+    .header ion-button{
+        margin-inline-start: 0px;
+        margin-inline-end: 0px; 
+        font-weight: 500;
+    }
+    .header ion-icon{
+        margin-right: 2px;
+    }
+    
+}
+
+.header ion-icon{
+    margin-right: 5px;
+}
+
+.header ion-label{
+    font-weight: 500;
+}
+
+.endereco{
+    font-size: 14px;
+    color: #666666;
+}

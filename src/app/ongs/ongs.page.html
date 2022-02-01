@@ -1,0 +1,237 @@
+<!--<ion-tabs>
+
+  <ion-tab-bar slot="top" color="primary">
+    
+    <ion-tab-button tab="sobre">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <ion-label>Sobre Nós</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="adocoes">
+      <ion-icon name="paw-outline"></ion-icon>
+      <ion-label>Animais para adoção</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="conteudos">
+      <ion-icon name="documents-outline"></ion-icon>
+      <ion-label>Conteúdos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="contato">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      <ion-label>Contato</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title size="small">Copyright © 2020 Adote Amor. Todos os direitos reservados.</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+
+</ion-tabs>-->
+<ion-header class="ion-text-center">
+  <ion-toolbar class="header">
+    <ion-button color="light" fill="clear" size="small" *ngIf="linkadocoes$ let url" [href]="url">
+      <ion-icon name="paw-outline"></ion-icon>
+      <ion-label >Adoções</ion-label>
+    </ion-button>
+    <ion-button color="light" fill="clear" size="small" *ngIf="linkprojetos$ let url" [href]="url">
+      <ion-icon name="heart-half-outline"></ion-icon>
+      <ion-label>Projetos</ion-label>
+    </ion-button>
+    <ion-button color="light" fill="clear" size="small" *ngIf="linkajuda$ let url" [href]="url">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <ion-label>Como ajudar</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="ion-text-center">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center center">
+      <!-- sobre a ong -->
+      <ion-col size="12" padding *ngIf="(dados$ | async) as dados" id="sobre">
+        <div *ngFor="let data of dados">
+          <ion-item padding *ngIf="data.logo">
+            <ion-img class="logo-ong" [src]="data.logo"></ion-img>
+          </ion-item>
+          <hr>
+          <div class="destaque">
+            <h2>Bem vindo, nós somos<span> {{ data.fantasia }}</span></h2>
+            <hr class="line-title">
+            <br>
+          </div>
+          <h3>Conheça um pouco da nossa história</h3>
+          <p>{{ data.sobre }}</p>
+        </div>
+      </ion-col>
+      <!-- animais para adocao -->
+      <div class="destaque" id="adocoes">
+        <br>
+        <h2>Animais para <span>Adoção</span></h2>
+        <hr class="line-title">
+      </div>
+      <ion-col size="12" padding *ngIf="(adocoes$ | async) as adocoes">
+        <ion-slides pager="true" [options]="slideOpts">
+          <ion-slide *ngFor="let adocao of adocoes">
+            <ion-col *ngIf="adocao.imagem">
+              <ion-img class="slide-img" [src]="adocao.imagem"></ion-img>
+              <ion-icon name="paw-outline" color="secondary"></ion-icon>
+              <h2>{{ adocao.nome }}</h2>
+              <p>{{ adocao.sobre }}</p>
+            </ion-col>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <!-- conteudos da ong -->
+      <div class="destaque" id="projetos">
+        <br>
+        <h2>Últimos <span>Projetos</span></h2>
+        <hr class="line-title">
+      </div>
+      <ion-col size="12" padding *ngIf="(conteudos$ | async) as conteudos">
+        <ion-slides pager="true" [options]="slideOpts">
+          <ion-slide *ngFor="let conteudo of conteudos">
+            <ion-col *ngIf="conteudo.imagem">
+              <ion-img class="slide-img" [src]="conteudo.imagem"></ion-img>
+              <ion-icon name="heart-half-outline" color="secondary"></ion-icon>
+              <h2>{{ conteudo.titulo }}</h2>
+              <p> Data: {{ conteudo.data | date: 'dd/MM/yyyy' }}</p>
+              <p>{{ conteudo.descricao }}</p>
+            </ion-col>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <!-- contas para deposito, razao social e cnpj da ONG para quando necessario nas transacoes -->
+      <ion-col size="12" padding  id="ajuda">
+        <div class="destaque">
+          <br>
+          <h2>Como <span>Ajudar</span></h2>
+          <hr class="line-title">
+          <br>
+        </div>
+        <div>
+          <h3>Gostaria de nos ajudar a prosseguir com nosso trabalho?</h3>
+          <h4>Através de nossos dados bancários você pode nos auxiliar financeiramente com qualquer valor!</h4>
+          <br>
+        </div>
+        <div *ngIf="(dados$ | async) as dados">
+          <div *ngFor="let data of dados">
+            <p><span class="strong">Razão Social: </span>{{data.razao_social}}</p>
+            <p><span class="strong">CNPJ: </span>{{data.cnpj}}</p>
+            <br>
+          </div>
+        </div>
+        <div *ngIf="(contas$ | async) as contas">
+          <div *ngFor="let conta of contas">
+            <p class="strong banco">{{ conta.titulo }}</p>
+            <p><span class="strong">Agência: </span>{{ conta.numero }}</p>
+            <p><span class="strong">Operacao: </span>{{ conta.operacao }}</p>
+            <p><span class="strong">Número: </span>{{ conta.numero }}</p>
+            <br>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- sub-footer -->
+    <ion-row class="ion-justify-content-center ion-align-items-center center row-footer">
+      <!-- dados -->
+      <hr>
+      <ion-col sizeXl="4" sizeLg="4" sizeMd="12" sizeSm="12" sizeXs="12" padding *ngIf="(dados$ | async) as dados" class="itens-footer">
+        <div *ngFor="let data of dados">
+          <div class="destaque">
+            <br>
+            <h2>Nós somos <span>{{data.fantasia}}</span></h2>
+            <hr class="line-title">
+            <br><br>
+          </div>
+          <ion-item padding *ngIf="data.logo" lines="none">
+            <ion-img class="logo-footer" [src]="data.logo"></ion-img>
+          </ion-item>
+        </div>
+      </ion-col>
+      <!-- endereco -->
+      <ion-col sizeXl="4" sizeLg="4" sizeMd="12" sizeSm="12" sizeXs="12" padding *ngIf="(dados$ | async) as dados" class="itens-footer">
+        <div class="destaque">
+          <br>
+          <h2>Onde <span> nos Encontrar</span></h2>
+          <hr class="line-title">
+          <br>
+        </div>
+        <div *ngFor="let data of dados" class="endereco">
+          <p><span *ngIf="(data.rua)">{{data.rua}}</span><span *ngIf="(data.numero)">, {{data.numero}}</span><span
+              *ngIf="(data.bairro)">, {{data.bairro}}</span></p>
+          <p>{{data.cidade}}/{{data.estado}}</p>
+          <p>{{data.cep}}</p>
+        </div>
+      </ion-col>
+      <!-- telefones e redes sociais -->
+      <ion-col sizeXl="4" sizeLg="4" sizeMd="12" sizeSm="12" sizeXs="12" padding class="itens-footer">
+        <div class="destaque">
+          <br>
+          <h2>Fale <span> Conosco</span></h2>
+          <hr class="line-title">
+          <br><br>
+        </div>
+        <div *ngIf="(telefones$ | async) as telefones">
+          <div *ngFor="let telefone of telefones">
+            <div class="inline">
+              <ion-icon name="call-outline" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <p>{{telefone.titulo}}: {{telefone.numero}}</p>
+              </ion-label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(dados$ | async) as dados">
+          <div *ngFor="let data of dados">
+            <div class="inline">
+              <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+              <ion-label>
+                <a href="mailto:data.email_principal">{{data.email_principal}}</a>
+              </ion-label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(marketing$ | async) as marketing" class="marketing">
+          <div class="inline-social padding">
+            <div *ngFor="let redes of marketing">
+              <a *ngIf="redes.titulo === 'Facebook'" href="{{redes.link}}" target="_blank">
+                <ion-icon name="logo-facebook" slot="start" color="primary"></ion-icon>
+                <!--<ion-label>
+                  <p>Facebook</p>
+                </ion-label>-->
+              </a>
+              <a *ngIf="redes.titulo === 'Instagram'" href="{{redes.link}}" target="_blank">
+                <ion-icon name="logo-instagram" class="insta" slot="start"></ion-icon>
+                <!--<ion-label>
+                  <p>Instagram</p>
+                </ion-label>-->
+              </a>
+              <a *ngIf="redes.titulo === 'LinkedIn'" href="{{redes.link}}" target="_blank">
+                <ion-icon name="logo-linkedin" slot="start" color="primary"></ion-icon>
+                <!--<ion-label>
+                  <p>Linkedin</p>
+                </ion-label>-->
+              </a>
+              <a *ngIf="redes.titulo === 'Youtube'" href="{{redes.link}}" target="_blank">
+                <ion-icon name="logo-youtube" slot="start" color="danger"></ion-icon>
+                <!--<ion-label>
+                  <p>Youtube</p>
+                </ion-label>-->
+              </a>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-title size="small">Copyright © 2020 Adote Amor. Todos os direitos reservados.</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Conteúdos da ONG</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="(conteudos$ | async) as conteudos">
+    <ng-container *ngIf="conteudos.length > 0; else noConteudos">
+      <app-conteudo-item
+        *ngFor="let conteudo of conteudos"
+        [conteudo]="conteudo"
+      ></app-conteudo-item>
+    </ng-container>
+    <ng-template #noConteudos>
+      <ion-item lines="none">
+        Nenhum conteúdo cadastrado até o momento...
+      </ion-item>
+    </ng-template>
+  </ion-list>
+</ion-content>
